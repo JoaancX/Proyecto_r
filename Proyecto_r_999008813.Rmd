@@ -1,0 +1,38 @@
+1. CONCIENDO LOS DAOTS
+
+1.1. CARGANDO EL PAQUETE TIDYVERSE
+```{r}
+install.packages("tidyverse")
+library(tidyverse) 
+```
+
+1.2. LEYENDO EL ARCHIVO DEATH_HANDWASHING USANDO READ_CSV ASGINANDOLO A LA VARIABLE YEARLY
+```{r}
+yearly <- read_csv('deaths_handwashing.csv')
+```
+1.3. IMPRIMIENDO LA VARIABLE YEARLY
+```{r}
+yearly
+```
+2. EL ALARAMANTE NUMERO DE MUERTES
+2.1. USE MUTATE PARA AGREGAR LA COLUMNA PROPORTION_DEATHS A YEARLY, ESTA NUEVA COLUMNA SE CALCULARA COMO LA PROPORCION DE MUERTES POR NUMERO DE NACIMIENTOS
+```{r}
+yearly %>%
+  mutate(proportion_deaths = deaths/births)
+```
+2.2. IMPRIMA YEARLY
+```{r}
+yearly
+```
+3.3 MUERTE EN LAS CLINICAS
+
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+ggplot(yearly, aes(x = proportion_deaths, y = year, color=clinic)) +
+  geom_line() +
+  scale_x_log10()
+
+
+```
+
