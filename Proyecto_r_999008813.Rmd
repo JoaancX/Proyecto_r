@@ -96,4 +96,37 @@ usando ggplot. Haga que el color de la línea dependa de handwashing_started
 ggplot(monthly, aes(x=date, y=proportion_deaths, color=handwashing_started)) +
   geom_line()
 ```
+6.3.Utilice la función labs para dar al eje x y al eje y una estética a las etiquetas.
+```{r}
+ggplot(monthly, aes(x=date, y=proportion_deaths, color=handwashing_started)) +
+  geom_line() +
+  labs(title = "Los resultados del lavado de manos", y = "Proporción de muertos", x = "Fecha")
+```
+7. ¿Mas Lavado de manos, menos muertes?
+
+7.1. Utilice group_by y summarise para calcular el promedio de proportion_deaths antes y despues de que se impusiera el lavado de manos.
+7.2. Asigne el resultado en la variable month_summary e imprimala
+7.3. resultado
+
+```{r}
+monthly %>%
+  group_by(handwashing_started) %>%
+  summarize(mean_proportion_deaths = mean(proportion_deaths))
+
+month_summary <- monthly %>%
+  group_by(handwashing_started) %>%
+  summarize(mean_proportion_deaths = mean(proportion_deaths))
+
+
+month_summary
+
+```
+8.
+
+```{r}
+monthly %>%
+  group_by(handwashing_started) %>%
+  summarize(mean_proportion_deaths = mean(proportion_deaths))
+  t.test(handwashing_started$proportion_deaths ~handwashing_started$group , data = month_summary)
+```
 
