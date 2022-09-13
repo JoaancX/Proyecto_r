@@ -56,7 +56,44 @@ head(monthly)
 5. El efecto del lavado de manos
 5.1. Haga una grafica lineal de proportion_deaths por fecha para el data frame monthly usando ggplot
 ```{r}
-ggplot(monthly, aes(x =  proportion_deaths, y = date)) +
+ggplot(monthly, aes(x =  proportion_deaths, y = date, group=1)) +
+  geom_line()
+
+split(monthly, f = df$date)
+```
+5.2. Utilice la funcion labs para dar al eje x y al eje y una estetitca a las etiquetas
+```{r}
+PR <- ggplot(monthly, aes(x =  proportion_deaths, y = date)) +
+  geom_line()
+PR + xlab("Proporcion de muertes")
+PR + ylab("Fechas")
+
+
+```
+5.3. Use group_by y summarise para encontra la media por año y guardelo en el dataset death_by_year.
+```{r}
+death_by_year <- monthly %>%
+  group_by(date) %>%
+  summarize(death_year = mean(deaths))
+death_by_year
+```
+5.4. Utilice el conjunto de datos death_by_year para crear un grafico de barras que muestre la media en cada año
+```{r}
+ggplot(death_by_year, aes(x = date, y = death_year)) +
+  geom_col()
+```
+6. Los resultados del lavado de manos
+6.1. Agruege una columna TRUE/FALSE a monthly llamado HandWashing_started, que sera TRUE a partir del año que se impuso el lavado de manos
+
+```{r}
+monthly <- monthly %>%
+  mutate(handwashing_started = date >= "1847")
+monthly
+```
+6.2.Haga una gráfica lineal de proportion_deaths por fecha para el data frame monthly
+usando ggplot. Haga que el color de la línea dependa de handwashing_started
+```{r}
+ggplot(monthly, aes(x=date, y=proportion_deaths, color=handwashing_started)) +
   geom_line()
 ```
 
