@@ -56,9 +56,7 @@ head(monthly)
 5. El efecto del lavado de manos
 5.1. Haga una grafica lineal de proportion_deaths por fecha para el data frame monthly usando ggplot
 ```{r}
-ggplot(monthly, aes(x = date, y = proportion_deaths)) +
+ggplot(monthly, aes(x =  proportion_deaths, y = date)) +
   geom_line()
-
-
 ```
 
