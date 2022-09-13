@@ -17,22 +17,23 @@ yearly
 2. EL ALARAMANTE NUMERO DE MUERTES
 2.1. USE MUTATE PARA AGREGAR LA COLUMNA PROPORTION_DEATHS A YEARLY, ESTA NUEVA COLUMNA SE CALCULARA COMO LA PROPORCION DE MUERTES POR NUMERO DE NACIMIENTOS
 ```{r}
-yearly %>%
+yearly <- yearly %>%
   mutate(proportion_deaths = deaths/births)
 ```
 2.2. IMPRIMA YEARLY
 ```{r}
 yearly
 ```
-3.3 MUERTE EN LAS CLINICAS
+3.MUERTE EN LAS CLINICAS
+3.1. utilice ggplot para hacer una grafica lineal de proportion_deaths por año(columna year) con una linea por clinica
+3.2. Las lineas deben tener collores distintos 
 
 ```{r}
 install.packages("ggplot2")
 library(ggplot2)
 ggplot(yearly, aes(x = proportion_deaths, y = year, color=clinic)) +
-  geom_line() +
-  scale_x_log10()
-
-
+  geom_line()+
+  scale_x_log10() +
+  scale_y_log10()
 ```
 
