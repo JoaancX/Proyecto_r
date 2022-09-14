@@ -141,19 +141,21 @@ monthly %>%
 month_summary <- monthly %>%
   group_by(handwashing_started) %>%
   summarize(mean_proportion_deaths = mean(proportion_deaths))
-
-
 month_summary
 
 ```
 8.
 
 ```{r}
-monthly %>%
-  group_by(handwashing_started) %>%
-  summarize(mean_proportion_deaths = mean(proportion_deaths))
- t.test(mean_proportion_deaths, handwashing_started)
- t.test(month_summary, conf.level = 0.95)
-t.test(handwashing_started ~ group , data = month_summary)
+t.test(monthly$proportion_deaths ~ monthly$handwashing_started, var.equal =TRUE)
 ```
+Two Sample t-test
 
+data:  monthly$proportion_deaths by monthly$handwashing_started
+t = 5.2195, df = 96, p-value = 1.036e-06
+alternative hypothesis: true difference in means between group FALSE and group TRUE is not equal to 0
+95 percent confidence interval:
+ 0.04659542 0.10378611
+sample estimates:
+mean in group FALSE  mean in group TRUE 
+         0.10691840          0.03172764 
