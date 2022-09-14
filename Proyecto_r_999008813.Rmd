@@ -56,10 +56,21 @@ head(monthly)
 5. El efecto del lavado de manos
 5.1. Haga una grafica lineal de proportion_deaths por fecha para el data frame monthly usando ggplot
 ```{r}
-ggplot(monthly, aes(x =  proportion_deaths, y = date, group=1)) +
-  geom_line()
 
-split(monthly, f = df$date)
+
+
+monthly
+str(monthly)
+
+date1 <-as.character(monthly$date)
+date2 <- as.Date(date1, "%Y")
+
+Prueba <- ggplot(monthly, aes(x =  date, y =proportion_deaths, group = 1)) +
+  geom_line()
+  
+  
+Prueba + scale_x_date(date_labels = "")
+
 ```
 5.2. Utilice la funcion labs para dar al eje x y al eje y una estetitca a las etiquetas
 ```{r}
@@ -127,6 +138,8 @@ month_summary
 monthly %>%
   group_by(handwashing_started) %>%
   summarize(mean_proportion_deaths = mean(proportion_deaths))
-  t.test(handwashing_started$proportion_deaths ~handwashing_started$group , data = month_summary)
+ t.test(mean_proportion_deaths, handwashing_started)
+ t.test(month_summary, conf.level = 0.95)
+t.test(handwashing_started ~ group , data = month_summary)
 ```
 
